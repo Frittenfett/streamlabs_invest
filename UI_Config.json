@@ -24,7 +24,7 @@
     },
     "investSound": {
         "type": "textbox",
-        "value": "smw_coin.wav",
+        "value": "",
         "label": "Invest Sound Filename",
         "tooltip": "Invest Sound File Name. Leave empty to disable. File has to be inside plugin itself!",
         "group": "General"
