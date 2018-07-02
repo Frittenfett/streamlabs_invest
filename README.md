@@ -8,7 +8,7 @@ The available default commands are:
 * !setInvest {number} (Caster only)
 * !invest {number}
 
-Viewer will invest their curreny coins into a pot. For example, you can make a goal if the pot reaches 100k you will make a 12 hours stream.
+Viewer will invest their currency coins into a pot. For example, you can make a goal if the pot reaches 100k you will make a 12 hours stream.
 
 The number is saved in a txt file, so you can easily put the number inside your Open Broadcaster Overlay.
 
