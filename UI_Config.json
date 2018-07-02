@@ -1,0 +1,148 @@
+﻿{
+    "output_file": "settings.json",
+
+    "onStartUpEnabled": {
+        "type": "checkbox",
+        "value": 1,
+        "label": "Enable on Chatbot start",
+        "tooltip": "Should the invest be enabled on startup of chatbot? If not, you have to start it with the Start Invest Command.",
+        "group": "General"
+    },
+    "minimumAmount": {
+        "type": "numberbox",
+        "value": 1,
+        "label": "Miniumum Invest",
+        "tooltip": "Minimum amount to invest.",
+        "group": "General"
+    },
+    "investFileName": {
+        "type": "textbox",
+        "value": "investCount.txt",
+        "label": "Invest Filename",
+        "tooltip": "Invest File Name. File has to be inside plugin itself",
+        "group": "General"
+    },
+    "investSound": {
+        "type": "textbox",
+        "value": "smw_coin.wav",
+        "label": "Invest Sound Filename",
+        "tooltip": "Invest Sound File Name. Leave empty to disable. File has to be inside plugin itself!",
+        "group": "General"
+    },
+    "investSoundVolume": {
+        "type": "slider",
+        "value": 1,
+        "min": 0,
+        "max": 1,
+        "ticks": 0.1,
+        "label": "Sound volumne",
+        "tooltip": "",
+        "group": "General"
+    },
+    "command": {
+        "type": "textbox",
+        "value": "!invest",
+        "label": "Invest command",
+        "tooltip": "Command for everyone to invest. Default !invest",
+        "group": "Commands"
+    },
+    "commandStart": {
+        "type": "textbox",
+        "value": "!startInvest",
+        "label": "Start Invest command",
+        "tooltip": "Command for Caster to start invest. Default !startInvest",
+        "group": "Commands"
+    },
+    "commandStop": {
+        "type": "textbox",
+        "value": "!stopInvest",
+        "label": "Stop Invest command",
+        "tooltip": "Command for Caster to stop invest. Default !stopInvest",
+        "group": "Commands"
+    },
+    "commandSet": {
+        "type": "textbox",
+        "value": "!setInvest",
+        "label": "Set Invest command",
+        "tooltip": "Command for Caster to set invest to a given value. Default !setInvest",
+        "group": "Commands"
+    },
+    "commandReset": {
+        "type": "textbox",
+        "value": "!resetInvest",
+        "label": "Reset Invest command",
+        "tooltip": "Command for Caster to reset invest. Default !resetInvest",
+        "group": "Commands"
+    },
+
+    "languageInvestDone": {
+        "type": "textbox",
+        "value": "{0} has invested {1} {2}! New invest value is {3}",
+        "label": "languageInvestDone",
+        "tooltip": "",
+        "group": "Language"
+    },
+    "languageErrorLessCurrency": {
+        "type": "textbox",
+        "value": "You don't have enough {1}!",
+        "label": "languageErrorLessCurrency",
+        "tooltip": "",
+        "group": "Language"
+    },
+    "languageErrorMinimumAmount": {
+        "type": "textbox",
+        "value": "You have to invest at least {0} {1}!",
+        "label": "languageErrorMinimumAmount",
+        "tooltip": "",
+        "group": "Language"
+    },
+    "languageErrorLessCurrency": {
+        "type": "textbox",
+        "value": "You don't have enough {1}!",
+        "label": "languageErrorLessCurrency",
+        "tooltip": "",
+        "group": "Language"
+    },
+    "languageErrorAlreadyStarted": {
+        "type": "textbox",
+        "value": "Invest is already in progress. Stop the invest first!",
+        "label": "languageErrorAlreadyStarted",
+        "tooltip": "",
+        "group": "Language"
+    },
+    "languageErrorAlreadyStopped": {
+        "type": "textbox",
+        "value": "An active invest is currently not running!",
+        "label": "languageErrorAlreadyStopped",
+        "tooltip": "",
+        "group": "Language"
+    },
+    "languageInvestStarted": {
+        "type": "textbox",
+        "value": "{0} has opend the invest! Use '{1} <{2}-99999>' to invest. The current invest value is {3}.",
+        "label": "languageInvestStarted",
+        "tooltip": "",
+        "group": "Language"
+    },
+    "languageInvestStopped": {
+        "type": "textbox",
+        "value": "{0} has closed the invest!",
+        "label": "languageInvestStopped",
+        "tooltip": "",
+        "group": "Language"
+    },
+    "languageInvestResetted": {
+        "type": "textbox",
+        "value": "{0} has resetted and disabled the invest!",
+        "label": "languageInvestResetted",
+        "tooltip": "",
+        "group": "Language"
+    },
+    "languageInvestSetted": {
+        "type": "textbox",
+        "value": "{0} has setted the invest to {1}!",
+        "label": "languageInvestSetted",
+        "tooltip": "",
+        "group": "Language"
+    }
+}
