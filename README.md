@@ -17,3 +17,9 @@ In addition, you can define a sound which should be played after each invest.
 The plugin does have a full UI Setting support and is full customable.
 
 Have fun :)
+
+
+### Changelog
+
+* v1.0.1 Fix "All in" invest
+* v1.0.0 Major Release

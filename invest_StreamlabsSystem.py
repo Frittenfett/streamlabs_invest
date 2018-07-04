@@ -17,7 +17,7 @@ ScriptName = "Invest"
 Website = "https://www.twitch.tv/frittenfettsenpai"
 Description = "Invest System. No API Key required. Viewer can add currency to a pot. Just set a goal in your stream like: for 100k coins I will do a 12h stream and let them lose their coins."
 Creator = "frittenfettsenpai"
-Version = "1.0.0"
+Version = "1.0.1"
 
 # ---------------------------------------
 #   [Required] Intialize Data (Only called on Load)
@@ -78,7 +78,7 @@ def Execute(data):
         
         if (investEnabled == 1 and data.GetParam(0).lower() == settings["command"] and data.GetParamCount() > 1):
             userInvest = int(data.GetParam(1))
-            if (Parent.GetPoints(user) > userInvest and userInvest > settings["minimumAmount"]):
+            if (Parent.GetPoints(user) >= userInvest and userInvest >= settings["minimumAmount"]):
                 Parent.RemovePoints(user, userInvest)
                 investAmount = investAmount + userInvest
                 Parent.SendTwitchMessage(settings["languageInvestDone"].format(username, userInvest, Parent.GetCurrencyName(), investAmount))
