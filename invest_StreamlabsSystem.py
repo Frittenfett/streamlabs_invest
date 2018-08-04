@@ -6,9 +6,9 @@ import codecs
 import re
 import os
 import clr
+
 clr.AddReference("IronPython.Modules.dll")
 import urllib
-
 
 # ---------------------------------------
 #   [Required]  Script Information
@@ -19,11 +19,12 @@ Description = "Invest System. No API Key required. Viewer can add currency to a 
 Creator = "frittenfettsenpai"
 Version = "1.0.1"
 
+
 # ---------------------------------------
 #   [Required] Intialize Data (Only called on Load)
 # ---------------------------------------
 def Init():
-    global settings, investEnabled, investAmount
+    global settings, investEnabled, investAmount, investGoal
     settingsfile = os.path.join(os.path.dirname(__file__), "settings.json")
 
     try:
@@ -37,8 +38,10 @@ def Init():
             "commandStop": "!stopInvest",
             "commandSet": "!setInvest",
             "commandReset": "!resetInvest",
+            "commandSetGoal": "!setInvestGoal",
             "minimumAmount": 1,
             "investFileName": "investCount.txt",
+            "investGoalFileName": "investGoal.txt",
             "investSound": "",
             "investSoundVolume": 1.00,
             "languageInvestDone": "{0} has invested {1} {2}! New invest value is {3}",
@@ -51,7 +54,6 @@ def Init():
             "languageInvestResetted": "{0} has resetted and disabled the invest!!",
             "languageInvestSetted": "{0} has setted the invest to {1}!"
         }
-
     investfile = os.path.join(os.path.dirname(__file__), settings['investFileName'])
     if os.path.isfile(investfile):
         file = open(investfile, "r")
@@ -64,6 +66,7 @@ def Init():
         investEnabled = 1
     else:
         investEnabled = 0
+    investGoal = 0
     return
 
 
@@ -71,31 +74,37 @@ def Init():
 #   [Required] Execute Data / Process Messages
 # ---------------------------------------
 def Execute(data):
-    global settings, investEnabled, investAmount
+    global settings, investEnabled, investAmount, investGoal
     if data.IsChatMessage():
         user = data.User
         username = Parent.GetDisplayName(user)
-        
+
         if (investEnabled == 1 and data.GetParam(0).lower() == settings["command"] and data.GetParamCount() > 1):
             userInvest = int(data.GetParam(1))
             if (Parent.GetPoints(user) >= userInvest and userInvest >= settings["minimumAmount"]):
                 Parent.RemovePoints(user, userInvest)
                 investAmount = investAmount + userInvest
-                Parent.SendTwitchMessage(settings["languageInvestDone"].format(username, userInvest, Parent.GetCurrencyName(), investAmount))
+                Parent.SendTwitchMessage(
+                    settings["languageInvestDone"].format(username, userInvest, Parent.GetCurrencyName(), investAmount))
                 SetInvest(investAmount)
                 if (settings['investSound'] != ""):
                     soundfile = os.path.join(os.path.dirname(__file__), settings['investSound'])
                     Parent.PlaySound(soundfile, settings['investSoundVolume'])
             else:
                 if (userInvest > settings["minimumAmount"]):
-                    Parent.SendTwitchWhisper(user, settings["languageErrorMinimumAmount"].format(settings["minimumAmount"], Parent.GetCurrencyName()))
+                    Parent.SendTwitchWhisper(user,
+                                             settings["languageErrorMinimumAmount"].format(settings["minimumAmount"],
+                                                                                           Parent.GetCurrencyName()))
                 else:
-                    Parent.SendTwitchWhisper(user, settings["languageErrorLessCurrency"].format(Parent.GetCurrencyName()))   
+                    Parent.SendTwitchWhisper(user,
+                                             settings["languageErrorLessCurrency"].format(Parent.GetCurrencyName()))
         elif (data.GetParam(0) == settings["commandStart"] and Parent.HasPermission(user, "Caster", "")):
             if (investEnabled == 1):
                 Parent.SendTwitchWhisper(user, settings["languageErrorAlreadyStarted"])
             else:
-                Parent.SendTwitchMessage(settings["languageInvestStarted"].format(username, settings['command'], settings['minimumAmount'], investAmount))
+                Parent.SendTwitchMessage(
+                    settings["languageInvestStarted"].format(username, settings['command'], settings['minimumAmount'],
+                                                             investAmount))
                 investEnabled = 1
         elif (data.GetParam(0) == settings["commandStop"] and Parent.HasPermission(user, "Caster", "")):
             if (investEnabled == 0):
@@ -108,6 +117,9 @@ def Execute(data):
             investAmount = 0
             Parent.SendTwitchMessage(settings["languageInvestResetted"].format(username))
             SetInvest(investAmount)
+        elif (data.GetParam(0) == settings["commandSetGoal"] and Parent.HasPermission(user, "Caster", "") and data.GetParamCount() > 1):
+            investGoal = int(data.GetParam(1))
+            SetInvest(investAmount)
         elif (data.GetParam(0) == settings["commandSet"] and data.GetParamCount() > 1 and Parent.HasPermission(user, "Caster", "")):
             investAmount = int(data.GetParam(1))
             if (investAmount > settings["minimumAmount"]):
@@ -115,17 +127,23 @@ def Execute(data):
                 SetInvest(investAmount)
     return
 
-#---------------------------------------
+
+# ---------------------------------------
 #    [Required] Tick Function
-#---------------------------------------
+# ---------------------------------------
 def Tick():
     return
 
 
 def SetInvest(investAmount):
-    global settings
+    global settings, investGoal
     investfile = os.path.join(os.path.dirname(__file__), settings['investFileName'])
     file = open(investfile, "w")
     file.write(str(investAmount))
+    file.close()
+
+    investgoalfile = os.path.join(os.path.dirname(__file__), settings['investGoalFileName'])
+    file = open(investgoalfile, "w")
+    file.write(str(investAmount) + " / " + str(investGoal))
     file.close()
     return

@@ -6,6 +6,7 @@ The available default commands are:
 * !stopInvest (Caster only)
 * !resetInvest (Caster only)
 * !setInvest {number} (Caster only)
+* !setInvestGoal {number} (Caster only)
 * !invest {number}
 
 Viewer will invest their currency coins into a pot. For example, you can make a goal if the pot reaches 100k you will make a 12 hours stream.
@@ -21,5 +22,6 @@ Have fun :)
 
 ### Changelog
 
+* v1.1.0 Add goal command
 * v1.0.1 Fix "All in" invest
 * v1.0.0 Major Release

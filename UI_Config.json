@@ -22,6 +22,13 @@
         "tooltip": "Invest File Name. File has to be inside plugin itself",
         "group": "General"
     },
+    "investGoalFileName": {
+        "type": "textbox",
+        "value": "investGoal.txt",
+        "label": "Invest Goal Filename",
+        "tooltip": "Invest Goal File Name. You don't have to use his. Will just print stuff like '3000 / 10000'",
+        "group": "General"
+    },
     "investSound": {
         "type": "textbox",
         "value": "",
@@ -74,6 +81,13 @@
         "tooltip": "Command for Caster to reset invest. Default !resetInvest",
         "group": "Commands"
     },
+    "commandSetGoal": {
+        "type": "textbox",
+        "value": "!setInvestGoal",
+        "label": "Set Invest Goal command",
+        "tooltip": "Command for Caster to set goal. Optional. Just needed for the new txt  invest. Default !setInvestGoal",
+        "group": "Commands"
+    },
 
     "languageInvestDone": {
         "type": "textbox",
@@ -93,13 +107,6 @@
         "type": "textbox",
         "value": "You have to invest at least {0} {1}!",
         "label": "languageErrorMinimumAmount",
-        "tooltip": "",
-        "group": "Language"
-    },
-    "languageErrorLessCurrency": {
-        "type": "textbox",
-        "value": "You don't have enough {1}!",
-        "label": "languageErrorLessCurrency",
         "tooltip": "",
         "group": "Language"
     },
